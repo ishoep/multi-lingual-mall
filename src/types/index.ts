@@ -1,4 +1,5 @@
 
+
 export interface Product {
   id: string;
   title: string;
@@ -9,20 +10,23 @@ export interface Product {
   rating: number;
   stock: number;
   featured: boolean;
-  trending?: boolean; // Add trending property
+  trending?: boolean;
   createdAt: string;
-  reviews?: number; // Add reviews property
-  details?: Record<string, string>; // Add details property
+  reviews?: number;
+  details?: Record<string, string>;
+  name?: string; // Adding this for backward compatibility
   translations: {
     ru: {
       title: string;
       description: string;
-      details?: Record<string, string>; // Add details in translations
+      details?: Record<string, string>;
+      name?: string; // Adding this for backward compatibility
     };
     uz: {
       title: string;
       description: string;
-      details?: Record<string, string>; // Add details in translations
+      details?: Record<string, string>;
+      name?: string; // Adding this for backward compatibility
     };
   };
 }
@@ -35,11 +39,11 @@ export interface Category {
   image: string;
   parentId?: string;
   featured: boolean;
-  productCount?: number; // Add productCount property
+  productCount?: number;
   translations?: {
     ru: { name: string },
     uz: { name: string }
-  }; // Add translations property
+  };
 }
 
 export interface Order {
@@ -49,17 +53,18 @@ export interface Order {
   total: number;
   status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
   createdAt: string;
-  date?: string; // Add date property
+  date?: string;
   shippingAddress: Address;
-  paymentMethod?: string; // Add paymentMethod property
+  paymentMethod?: string;
 }
 
 export interface OrderItem {
   productId: string;
-  title: string; // Changed from name to title
+  title: string;
   price: number;
   quantity: number;
   image?: string;
+  name?: string; // Adding this for backward compatibility
 }
 
 export interface User {
@@ -73,17 +78,16 @@ export interface User {
 }
 
 export interface Address {
-  id: string;
-  fullName: string; // Changed from name to fullName
+  id?: string; // Making optional for compatibility
+  fullName?: string; // Making optional for compatibility
   street: string;
   city: string;
   state: string;
-  postalCode: string; // Instead of zip
+  postalCode?: string; // Making optional for compatibility
+  zip?: string; // Adding for backward compatibility
   country: string;
-  isDefault: boolean;
-  // Additional fields used in api.ts
+  isDefault?: boolean; // Making optional for compatibility
   name?: string; // For backward compatibility
-  zip?: string; // For backward compatibility
 }
 
 export interface CartItem {
@@ -103,3 +107,4 @@ export interface Review {
   comment: string;
   createdAt: string;
 }
+
