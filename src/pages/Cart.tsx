@@ -13,7 +13,7 @@ const Cart = () => {
   const { items, removeItem, updateQuantity } = useCart();
   const [promoCode, setPromoCode] = useState("");
 
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subtotal = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
   const shipping = items.length > 0 ? 10 : 0;
   const total = subtotal + shipping;
 
@@ -35,24 +35,24 @@ const Cart = () => {
               <Card className="overflow-hidden">
                 <div className="p-6">
                   {items.map((item) => (
-                    <div key={item.productId} className="flex flex-col sm:flex-row items-start sm:items-center py-4 border-b">
+                    <div key={item.product.id} className="flex flex-col sm:flex-row items-start sm:items-center py-4 border-b">
                       <div className="w-full sm:w-24 h-24 bg-gray-100 dark:bg-gray-800 mb-4 sm:mb-0 sm:mr-4 flex-shrink-0"></div>
                       <div className="flex-grow">
-                        <h3 className="font-medium">{item.title}</h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">${item.price.toFixed(2)}</p>
+                        <h3 className="font-medium">{item.product.title || item.product.name}</h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">${item.product.price.toFixed(2)}</p>
                       </div>
                       <div className="flex items-center mt-4 sm:mt-0">
                         <Input
                           type="number"
                           min="1"
                           value={item.quantity}
-                          onChange={(e) => updateQuantity(item.productId, parseInt(e.target.value))}
+                          onChange={(e) => updateQuantity(item.product.id, parseInt(e.target.value))}
                           className="w-16 mr-4"
                         />
                         <Button
                           variant="ghost"
                           size="icon"
-                          onClick={() => removeItem(item.productId)}
+                          onClick={() => removeItem(item.product.id)}
                         >
                           <Trash2 className="h-5 w-5" />
                         </Button>

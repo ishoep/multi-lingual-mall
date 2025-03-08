@@ -1,11 +1,7 @@
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { toast } from "sonner";
-import { Product } from "@/types";
-
-interface CartItem {
-  product: Product;
-  quantity: number;
-}
+import { Product, CartItem } from "@/types";
 
 interface CartContextType {
   items: CartItem[];
@@ -68,7 +64,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     });
     
-    toast.success(`${product.title} added to cart!`);
+    toast.success(`${product.title || product.name} added to cart!`);
   };
 
   // Remove item from cart

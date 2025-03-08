@@ -1,8 +1,7 @@
 
-
 export interface Product {
   id: string;
-  title: string;
+  title?: string;
   description: string;
   price: number;
   images: string[];
@@ -17,13 +16,13 @@ export interface Product {
   name?: string; // Adding this for backward compatibility
   translations: {
     ru: {
-      title: string;
+      title?: string;
       description: string;
       details?: Record<string, string>;
       name?: string; // Adding this for backward compatibility
     };
     uz: {
-      title: string;
+      title?: string;
       description: string;
       details?: Record<string, string>;
       name?: string; // Adding this for backward compatibility
@@ -60,7 +59,7 @@ export interface Order {
 
 export interface OrderItem {
   productId: string;
-  title: string;
+  title?: string;
   price: number;
   quantity: number;
   image?: string;
@@ -91,11 +90,8 @@ export interface Address {
 }
 
 export interface CartItem {
-  productId: string;
-  title: string;
-  price: number;
+  product: Product;
   quantity: number;
-  image: string;
 }
 
 export interface Review {
@@ -107,4 +103,3 @@ export interface Review {
   comment: string;
   createdAt: string;
 }
-
