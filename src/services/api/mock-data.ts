@@ -1,8 +1,10 @@
-
 import { Product, Category, Order } from "@/types";
 
+// Simulate API calls with delay
+export const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
 // Mock data (simulating an API)
-const mockProducts: Product[] = [
+export const mockProducts: Product[] = [
   {
     id: "1",
     name: "Premium Wireless Headphones",
@@ -19,7 +21,7 @@ const mockProducts: Product[] = [
     trending: true,
     rating: 4.8,
     reviews: 124,
-    createdAt: "2023-01-15T09:30:00Z", // Added createdAt
+    createdAt: "2023-01-15T09:30:00Z",
     details: {
       "Brand": "SoundMax",
       "Model": "ProSound X1",
@@ -71,7 +73,7 @@ const mockProducts: Product[] = [
     trending: true,
     rating: 4.6,
     reviews: 89,
-    createdAt: "2023-02-20T14:45:00Z", // Added createdAt
+    createdAt: "2023-02-20T14:45:00Z",
     details: {
       "Brand": "TechFit",
       "Model": "Series 5",
@@ -415,14 +417,14 @@ const mockProducts: Product[] = [
   }
 ];
 
-const mockCategories: Category[] = [
+export const mockCategories: Category[] = [
   {
     id: "1",
     name: "Audio",
     slug: "audio",
     image: "https://images.unsplash.com/photo-1612199509555-d2933cce5323?w=800&auto=format&fit=crop&q=80",
     productCount: 2,
-    featured: false, // Added featured property
+    featured: false,
     translations: {
       ru: { name: "Аудио" },
       uz: { name: "Audio" }
@@ -434,7 +436,7 @@ const mockCategories: Category[] = [
     slug: "wearables",
     image: "https://images.unsplash.com/photo-1617043786394-ae5a3f7c09ac?w=800&auto=format&fit=crop&q=80",
     productCount: 1,
-    featured: false, // Added featured property
+    featured: false,
     translations: {
       ru: { name: "Носимые устройства" },
       uz: { name: "Kiyiladigan qurilmalar" }
@@ -446,7 +448,7 @@ const mockCategories: Category[] = [
     slug: "electronics",
     image: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=800&auto=format&fit=crop&q=80",
     productCount: 2,
-    featured: false, // Added featured property
+    featured: false,
     translations: {
       ru: { name: "Электроника" },
       uz: { name: "Elektronika" }
@@ -458,7 +460,7 @@ const mockCategories: Category[] = [
     slug: "accessories",
     image: "https://images.unsplash.com/photo-1617043786394-ae5a3f7c09ac?w=800&auto=format&fit=crop&q=80",
     productCount: 3,
-    featured: false, // Added featured property
+    featured: false,
     translations: {
       ru: { name: "Аксессуары" },
       uz: { name: "Aksessuarlar" }
@@ -466,7 +468,7 @@ const mockCategories: Category[] = [
   }
 ];
 
-const mockOrders: Order[] = [
+export const mockOrders: Order[] = [
   {
     id: "ord-001",
     userId: "1",
@@ -487,7 +489,7 @@ const mockOrders: Order[] = [
     total: 379.98,
     status: "delivered",
     date: "2023-10-15T14:22:00Z",
-    createdAt: "2023-10-15T14:22:00Z", // Added createdAt
+    createdAt: "2023-10-15T14:22:00Z",
     shippingAddress: {
       name: "John Doe",
       street: "123 Main St",
@@ -512,7 +514,7 @@ const mockOrders: Order[] = [
     total: 1299.99,
     status: "shipped",
     date: "2023-11-02T11:45:00Z",
-    createdAt: "2023-11-02T11:45:00Z", // Added createdAt
+    createdAt: "2023-11-02T11:45:00Z",
     shippingAddress: {
       name: "John Doe",
       street: "123 Main St",
@@ -524,137 +526,3 @@ const mockOrders: Order[] = [
     paymentMethod: "PayPal"
   }
 ];
-
-// Simulate API calls with delay
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-
-// API functions
-export const api = {
-  // Products
-  getProducts: async (): Promise<Product[]> => {
-    await delay(500);
-    return [...mockProducts];
-  },
-  
-  getProductById: async (id: string): Promise<Product | undefined> => {
-    await delay(300);
-    return mockProducts.find(p => p.id === id);
-  },
-  
-  getProductsByCategory: async (category: string): Promise<Product[]> => {
-    await delay(500);
-    return mockProducts.filter(p => p.category === category);
-  },
-  
-  getFeaturedProducts: async (): Promise<Product[]> => {
-    await delay(300);
-    return mockProducts.filter(p => p.featured);
-  },
-  
-  getTrendingProducts: async (): Promise<Product[]> => {
-    await delay(300);
-    return mockProducts.filter(p => p.trending);
-  },
-  
-  searchProducts: async (query: string): Promise<Product[]> => {
-    await delay(500);
-    const searchTerm = query.toLowerCase();
-    return mockProducts.filter(p => 
-      p.name.toLowerCase().includes(searchTerm) || 
-      p.description.toLowerCase().includes(searchTerm) ||
-      p.category.toLowerCase().includes(searchTerm)
-    );
-  },
-  
-  addProduct: async (product: Omit<Product, 'id'>): Promise<Product> => {
-    await delay(800);
-    const newProduct = {
-      ...product,
-      id: Date.now().toString()
-    };
-    mockProducts.push(newProduct);
-    return newProduct;
-  },
-  
-  updateProduct: async (product: Product): Promise<Product> => {
-    await delay(800);
-    const index = mockProducts.findIndex(p => p.id === product.id);
-    if (index !== -1) {
-      mockProducts[index] = product;
-      return product;
-    }
-    throw new Error('Product not found');
-  },
-  
-  deleteProduct: async (id: string): Promise<boolean> => {
-    await delay(500);
-    const index = mockProducts.findIndex(p => p.id === id);
-    if (index !== -1) {
-      mockProducts.splice(index, 1);
-      return true;
-    }
-    return false;
-  },
-  
-  // Categories
-  getCategories: async (): Promise<Category[]> => {
-    await delay(300);
-    return [...mockCategories];
-  },
-  
-  getCategoryBySlug: async (slug: string): Promise<Category | undefined> => {
-    await delay(200);
-    return mockCategories.find(c => c.slug === slug);
-  },
-  
-  // Orders
-  getOrdersByUserId: async (userId: string): Promise<Order[]> => {
-    await delay(500);
-    return mockOrders.filter(o => o.userId === userId);
-  },
-  
-  getOrderById: async (id: string): Promise<Order | undefined> => {
-    await delay(300);
-    return mockOrders.find(o => o.id === id);
-  },
-  
-  createOrder: async (order: Omit<Order, 'id' | 'date' | 'status'>): Promise<Order> => {
-    await delay(1000);
-    const newOrder = {
-      ...order,
-      id: `ord-${Date.now().toString().slice(-3)}`,
-      date: new Date().toISOString(),
-      status: 'pending' as const
-    };
-    mockOrders.push(newOrder);
-    return newOrder;
-  },
-  
-  // Translation (simplified mock)
-  translateText: async (
-    text: string, 
-    sourceLang: string, 
-    targetLang: string
-  ): Promise<string> => {
-    await delay(800);
-    
-    // Simple mock translation - in real app, use a translation API
-    const translations: Record<string, Record<string, string>> = {
-      "Premium Wireless Headphones": {
-        "ru": "Премиальные беспроводные наушники",
-        "uz": "Premium simsiz quloqchinlar"
-      },
-      "Experience crystal-clear sound with our premium wireless headphones featuring noise cancellation technology and 40-hour battery life.": {
-        "ru": "Оцените кристально чистый звук с нашими премиальными беспроводными наушниками с технологией шумоподавления и 40-часовой батареей.",
-        "uz": "Shovqinni yo'q qilish texnologiyasi va 40 soatlik batareya quvvati bilan jihozlangan premium simsiz quloqchinlarimiz bilan kristall toza tovushni his qiling."
-      }
-    };
-    
-    if (translations[text] && translations[text][targetLang]) {
-      return translations[text][targetLang];
-    }
-    
-    // For demo purposes, prefix the text with the target language
-    return `[${targetLang}] ${text}`;
-  }
-};
