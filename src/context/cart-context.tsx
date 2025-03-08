@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { toast } from "sonner";
 import { Product } from "@/types";
@@ -18,7 +17,17 @@ interface CartContextType {
   totalPrice: number;
 }
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+const initialState: CartContextType = {
+  items: [],
+  addItem: () => {},
+  removeItem: () => {},
+  updateQuantity: () => {},
+  clearCart: () => {},
+  totalItems: 0,
+  totalPrice: 0,
+};
+
+export const CartContext = createContext<CartContextType>(initialState);
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [items, setItems] = useState<CartItem[]>(() => {
@@ -59,7 +68,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     });
     
-    toast.success(`${product.name} added to cart!`);
+    toast.success(`${product.title} added to cart!`);
   };
 
   // Remove item from cart

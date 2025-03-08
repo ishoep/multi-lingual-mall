@@ -25,7 +25,7 @@ export type TranslationType = {
     browseCategories: string;
     electronics: string;
     clothing: string;
-    home: string;
+    homeGoods: string; // Changed from duplicate "home"
     electronicsDescription: string;
     clothingDescription: string;
     homeDescription: string;
@@ -103,7 +103,7 @@ export const translations: TranslationType = {
     browseCategories: 'Browse our selection of premium categories, handpicked for your enjoyment.',
     electronics: 'Electronics',
     clothing: 'Clothing',
-    home: 'Home & Living',
+    homeGoods: 'Home & Living', // Changed property name
     electronicsDescription: 'Discover the latest tech gadgets and innovations',
     clothingDescription: 'Explore fashionable apparel for all seasons',
     homeDescription: 'Find beautiful items to enhance your living space',
@@ -179,7 +179,7 @@ export const translations: TranslationType = {
     browseCategories: 'Просмотрите наш выбор премиум-категорий, подобранных специально для вас.',
     electronics: 'Электроника',
     clothing: 'Одежда',
-    home: 'Дом и быт',
+    homeGoods: 'Дом и быт', // Changed property name
     electronicsDescription: 'Откройте для себя новейшие технические гаджеты и инновации',
     clothingDescription: 'Исследуйте модную одежду для всех сезонов',
     homeDescription: 'Найдите красивые предметы для украшения вашего жилого пространства',
@@ -255,7 +255,7 @@ export const translations: TranslationType = {
     browseCategories: 'Sizning zavqingiz uchun maxsus tanlangan premium kategoriyalarimizni ko\'rib chiqing.',
     electronics: 'Elektronika',
     clothing: 'Kiyim-kechak',
-    home: 'Uy va turmush',
+    homeGoods: 'Uy va turmush', // Changed property name
     electronicsDescription: 'Eng so\'nggi texnologik qurilmalar va innovatsiyalarni kashf eting',
     clothingDescription: 'Barcha mavsumlar uchun zamonaviy kiyimlarni tadqiq qiling',
     homeDescription: 'Yashash joyingizni yaxshilash uchun chiroyli buyumlarni toping',

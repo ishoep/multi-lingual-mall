@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { toast } from "sonner";
 
@@ -22,7 +21,18 @@ interface AuthContextType {
   updateProfile: (data: Partial<User>) => Promise<void>;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const initialState: AuthContextType = {
+  user: null,
+  isLoading: false,
+  isAuthenticated: false,
+  login: async () => {},
+  register: async () => {},
+  logout: () => {},
+  loginWithGoogle: async () => {},
+  updateProfile: async () => {},
+};
+
+export const AuthContext = createContext<AuthContextType>(initialState);
 
 // Mock authentication for demo purposes
 // In a real app, you would use Firebase, Auth0, or other auth providers

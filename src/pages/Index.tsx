@@ -1,15 +1,12 @@
 
-import { useContext } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Layout from "@/components/layout/layout";
-import { LanguageContext } from "@/context/language-context";
-import { translations } from "@/data/translations";
+import { useLanguage } from "@/context/language-context";
 
 const Index = () => {
-  const { language } = useContext(LanguageContext);
-  const t = translations[language];
+  const { language, t } = useLanguage();
 
   return (
     <Layout>
@@ -19,18 +16,18 @@ const Index = () => {
           <div className="flex flex-col items-center space-y-4 text-center">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                {t.heroTitle}
+                {t('heroTitle')}
               </h1>
               <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                {t.heroSubtitle}
+                {t('heroSubtitle')}
               </p>
             </div>
             <div className="space-x-4">
               <Button size="lg" className="hover-lift">
-                {t.shopNow}
+                {t('shopNow')}
               </Button>
               <Button variant="outline" size="lg" className="hover-lift">
-                {t.learnMore}
+                {t('learnMore')}
               </Button>
             </div>
           </div>
@@ -43,23 +40,27 @@ const Index = () => {
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                {t.featuredCategories}
+                {t('featuredCategories')}
               </h2>
               <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                {t.browseCategories}
+                {t('browseCategories')}
               </p>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            {["electronics", "clothing", "home"].map((category) => (
-              <Card key={category} className="card-hover overflow-hidden">
+            {[
+              { key: 'electronics', description: 'electronicsDescription' },
+              { key: 'clothing', description: 'clothingDescription' },
+              { key: 'homeGoods', description: 'homeDescription' }
+            ].map((category) => (
+              <Card key={category.key} className="card-hover overflow-hidden">
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold">{t[category]}</h3>
+                  <h3 className="text-2xl font-bold">{t(category.key)}</h3>
                   <p className="text-gray-500 dark:text-gray-400 mt-2">
-                    {t[`${category}Description`]}
+                    {t(category.description)}
                   </p>
                   <Button variant="link" className="p-0 mt-4">
-                    {t.exploreCategory} →
+                    {t('exploreCategory')} →
                   </Button>
                 </div>
               </Card>
@@ -74,19 +75,19 @@ const Index = () => {
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                {t.featuredProducts}
+                {t('featuredProducts')}
               </h2>
               <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                {t.discoverProducts}
+                {t('discoverProducts')}
               </p>
             </div>
           </div>
           <Tabs defaultValue="popular" className="mt-8">
             <div className="flex justify-center">
               <TabsList>
-                <TabsTrigger value="popular">{t.popular}</TabsTrigger>
-                <TabsTrigger value="new">{t.new}</TabsTrigger>
-                <TabsTrigger value="sale">{t.sale}</TabsTrigger>
+                <TabsTrigger value="popular">{t('popular')}</TabsTrigger>
+                <TabsTrigger value="new">{t('new')}</TabsTrigger>
+                <TabsTrigger value="sale">{t('sale')}</TabsTrigger>
               </TabsList>
             </div>
             <TabsContent value="popular" className="mt-6">
@@ -98,7 +99,7 @@ const Index = () => {
                       <div className="w-full h-full bg-gray-100 dark:bg-gray-800 animate-pulse"></div>
                     </div>
                     <div className="p-4">
-                      <h3 className="font-semibold">{t.productTitle}</h3>
+                      <h3 className="font-semibold">{t('productTitle')}</h3>
                       <p className="text-sm text-gray-500 dark:text-gray-400">
                         $99.99
                       </p>
@@ -116,7 +117,7 @@ const Index = () => {
                       <div className="w-full h-full bg-gray-100 dark:bg-gray-800 animate-pulse"></div>
                     </div>
                     <div className="p-4">
-                      <h3 className="font-semibold">{t.newProduct}</h3>
+                      <h3 className="font-semibold">{t('newProduct')}</h3>
                       <p className="text-sm text-gray-500 dark:text-gray-400">
                         $129.99
                       </p>
@@ -134,7 +135,7 @@ const Index = () => {
                       <div className="w-full h-full bg-gray-100 dark:bg-gray-800 animate-pulse"></div>
                     </div>
                     <div className="p-4">
-                      <h3 className="font-semibold">{t.saleProduct}</h3>
+                      <h3 className="font-semibold">{t('saleProduct')}</h3>
                       <div className="flex items-center space-x-2">
                         <p className="text-sm text-gray-500 dark:text-gray-400 line-through">
                           $149.99

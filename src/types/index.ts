@@ -22,6 +22,16 @@ export interface Product {
   };
 }
 
+export interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  image: string;
+  parentId?: string;
+  featured: boolean;
+}
+
 export interface Order {
   id: string;
   userId: string;

@@ -1,5 +1,5 @@
 
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,21 +9,25 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { ThemeContext } from "@/context/theme-context";
-import { LanguageContext } from "@/context/language-context";
-import { AuthContext } from "@/context/auth-context";
-import { CartContext } from "@/context/cart-context";
-import { translations } from "@/data/translations";
+import { useTheme } from "@/context/theme-context";
+import { useLanguage } from "@/context/language-context";
+import { useAuth } from "@/context/auth-context";
+import { useCart } from "@/context/cart-context";
 import { Menu, ShoppingCart, Sun, Moon, Globe, User } from "lucide-react";
 
 const Navbar = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-  const { language, setLanguage } = useContext(LanguageContext);
-  const { user, logout } = useContext(AuthContext);
-  const { items } = useContext(CartContext);
+  const { theme, setTheme } = useTheme();
+  const { language, setLanguage } = useLanguage();
+  const { user, logout } = useAuth();
+  const { items } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
-  const t = translations[language];
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+  
+  // Get translations from context
+  const { t } = useLanguage();
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -43,21 +47,21 @@ const Navbar = () => {
                   className="hover:text-foreground/80"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {t.home}
+                  {t('nav.home')}
                 </Link>
                 <Link
                   to="/products"
                   className="hover:text-foreground/80"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {t.products}
+                  {t('nav.products')}
                 </Link>
                 <Link
                   to="/categories"
                   className="hover:text-foreground/80"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {t.categories}
+                  {t('nav.categories')}
                 </Link>
                 {user && (
                   <Link
@@ -65,7 +69,7 @@ const Navbar = () => {
                     className="hover:text-foreground/80"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    {t.profile}
+                    {t('profile.title')}
                   </Link>
                 )}
                 {user?.isAdmin && (
@@ -74,7 +78,7 @@ const Navbar = () => {
                     className="hover:text-foreground/80"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    {t.admin}
+                    {t('admin.dashboard')}
                   </Link>
                 )}
               </nav>
@@ -85,13 +89,13 @@ const Navbar = () => {
           </Link>
           <nav className="hidden md:flex gap-6 text-sm font-medium">
             <Link to="/" className="hover:text-foreground/80">
-              {t.home}
+              {t('nav.home')}
             </Link>
             <Link to="/products" className="hover:text-foreground/80">
-              {t.products}
+              {t('nav.products')}
             </Link>
             <Link to="/categories" className="hover:text-foreground/80">
-              {t.categories}
+              {t('nav.categories')}
             </Link>
           </nav>
         </div>
@@ -100,18 +104,18 @@ const Navbar = () => {
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Globe className="h-5 w-5" />
-                <span className="sr-only">{t.language}</span>
+                <span className="sr-only">{t('language')}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem onClick={() => setLanguage("en")}>
-                {t.english}
+                {t('english')}
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setLanguage("ru")}>
-                {t.russian}
+                {t('russian')}
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setLanguage("uz")}>
-                {t.uzbek}
+                {t('uzbek')}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -131,7 +135,7 @@ const Navbar = () => {
                   {items.length}
                 </span>
               )}
-              <span className="sr-only">{t.cart}</span>
+              <span className="sr-only">{t('cart.title')}</span>
             </Button>
           </Link>
           {user ? (
@@ -139,20 +143,20 @@ const Navbar = () => {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon">
                   <User className="h-5 w-5" />
-                  <span className="sr-only">{t.profile}</span>
+                  <span className="sr-only">{t('profile.title')}</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
-                  <Link to="/profile">{t.profile}</Link>
+                  <Link to="/profile">{t('profile.title')}</Link>
                 </DropdownMenuItem>
                 {user.isAdmin && (
                   <DropdownMenuItem asChild>
-                    <Link to="/admin">{t.admin}</Link>
+                    <Link to="/admin">{t('admin.dashboard')}</Link>
                   </DropdownMenuItem>
                 )}
                 <DropdownMenuItem onClick={logout}>
-                  {t.logout}
+                  {t('profile.logout')}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -161,15 +165,15 @@ const Navbar = () => {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon">
                   <User className="h-5 w-5" />
-                  <span className="sr-only">{t.login}</span>
+                  <span className="sr-only">{t('auth.login')}</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
-                  <Link to="/login">{t.login}</Link>
+                  <Link to="/login">{t('auth.login')}</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/register">{t.register}</Link>
+                  <Link to="/register">{t('auth.signup')}</Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
