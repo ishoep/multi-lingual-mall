@@ -19,6 +19,7 @@ const mockProducts: Product[] = [
     trending: true,
     rating: 4.8,
     reviews: 124,
+    createdAt: "2023-01-15T09:30:00Z", // Added createdAt
     details: {
       "Brand": "SoundMax",
       "Model": "ProSound X1",
@@ -70,6 +71,7 @@ const mockProducts: Product[] = [
     trending: true,
     rating: 4.6,
     reviews: 89,
+    createdAt: "2023-02-20T14:45:00Z", // Added createdAt
     details: {
       "Brand": "TechFit",
       "Model": "Series 5",
@@ -420,6 +422,7 @@ const mockCategories: Category[] = [
     slug: "audio",
     image: "https://images.unsplash.com/photo-1612199509555-d2933cce5323?w=800&auto=format&fit=crop&q=80",
     productCount: 2,
+    featured: false, // Added featured property
     translations: {
       ru: { name: "Аудио" },
       uz: { name: "Audio" }
@@ -431,6 +434,7 @@ const mockCategories: Category[] = [
     slug: "wearables",
     image: "https://images.unsplash.com/photo-1617043786394-ae5a3f7c09ac?w=800&auto=format&fit=crop&q=80",
     productCount: 1,
+    featured: false, // Added featured property
     translations: {
       ru: { name: "Носимые устройства" },
       uz: { name: "Kiyiladigan qurilmalar" }
@@ -442,6 +446,7 @@ const mockCategories: Category[] = [
     slug: "electronics",
     image: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=800&auto=format&fit=crop&q=80",
     productCount: 2,
+    featured: false, // Added featured property
     translations: {
       ru: { name: "Электроника" },
       uz: { name: "Elektronika" }
@@ -453,6 +458,7 @@ const mockCategories: Category[] = [
     slug: "accessories",
     image: "https://images.unsplash.com/photo-1617043786394-ae5a3f7c09ac?w=800&auto=format&fit=crop&q=80",
     productCount: 3,
+    featured: false, // Added featured property
     translations: {
       ru: { name: "Аксессуары" },
       uz: { name: "Aksessuarlar" }
@@ -481,6 +487,7 @@ const mockOrders: Order[] = [
     total: 379.98,
     status: "delivered",
     date: "2023-10-15T14:22:00Z",
+    createdAt: "2023-10-15T14:22:00Z", // Added createdAt
     shippingAddress: {
       name: "John Doe",
       street: "123 Main St",
@@ -505,6 +512,7 @@ const mockOrders: Order[] = [
     total: 1299.99,
     status: "shipped",
     date: "2023-11-02T11:45:00Z",
+    createdAt: "2023-11-02T11:45:00Z", // Added createdAt
     shippingAddress: {
       name: "John Doe",
       street: "123 Main St",

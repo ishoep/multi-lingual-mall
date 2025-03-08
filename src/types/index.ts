@@ -10,7 +10,7 @@ export interface Product {
   stock: number;
   featured: boolean;
   trending?: boolean;
-  createdAt: string;
+  createdAt?: string; // Making this optional to match mock data
   reviews?: number;
   details?: Record<string, string>;
   name?: string; // Adding this for backward compatibility
@@ -37,7 +37,7 @@ export interface Category {
   description?: string;
   image: string;
   parentId?: string;
-  featured: boolean;
+  featured?: boolean; // Making this optional to match mock data
   productCount?: number;
   translations?: {
     ru: { name: string },
@@ -51,7 +51,7 @@ export interface Order {
   items: OrderItem[];
   total: number;
   status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
-  createdAt: string;
+  createdAt?: string; // Making this optional to match mock data
   date?: string;
   shippingAddress: Address;
   paymentMethod?: string;
