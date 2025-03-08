@@ -1,87 +1,80 @@
 
 export interface Product {
   id: string;
-  name: string;
+  title: string;
   description: string;
   price: number;
   images: string[];
   category: string;
+  rating: number;
   stock: number;
-  featured?: boolean;
-  trending?: boolean;
-  rating?: number;
-  reviews?: number;
-  details?: {
-    [key: string]: string;
-  };
-  translations?: {
-    ru?: {
-      name: string;
+  featured: boolean;
+  createdAt: string;
+  translations: {
+    ru: {
+      title: string;
       description: string;
-      details?: {
-        [key: string]: string;
-      };
     };
-    uz?: {
-      name: string;
+    uz: {
+      title: string;
       description: string;
-      details?: {
-        [key: string]: string;
-      };
     };
-  };
-}
-
-export interface Category {
-  id: string;
-  name: string;
-  slug: string;
-  image?: string;
-  productCount?: number;
-  translations?: {
-    ru?: { name: string };
-    uz?: { name: string };
   };
 }
 
 export interface Order {
   id: string;
   userId: string;
-  items: {
-    productId: string;
-    name: string;
-    price: number;
-    quantity: number;
-  }[];
+  items: OrderItem[];
   total: number;
   status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
-  date: string;
-  shippingAddress: {
-    name: string;
-    street: string;
-    city: string;
-    state: string;
-    zip: string;
-    country: string;
-  };
-  paymentMethod: string;
+  createdAt: string;
+  shippingAddress: Address;
+}
+
+export interface OrderItem {
+  productId: string;
+  title: string;
+  price: number;
+  quantity: number;
+  image: string;
 }
 
 export interface User {
   id: string;
-  name: string;
   email: string;
+  name?: string;
   phone?: string;
-  profileImg?: string;
-  isAdmin?: boolean;
-  shippingAddresses?: {
-    id: string;
-    name: string;
-    street: string;
-    city: string;
-    state: string;
-    zip: string;
-    country: string;
-    isDefault?: boolean;
-  }[];
+  isAdmin: boolean;
+  addresses: Address[];
+  createdAt: string;
+}
+
+export interface Address {
+  id: string;
+  fullName: string;
+  street: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  country: string;
+  isDefault: boolean;
+}
+
+export interface CartItem {
+  productId: string;
+  title: string;
+  price: number;
+  quantity: number;
+  image: string;
+}
+
+export interface Review {
+  id: string;
+  productId: string;
+  userId: string;
+  userName: string;
+  rating: number;
+  comment: string;
+  createdAt: string;
 }
